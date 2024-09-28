@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Safety Hub</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+   
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --color-primary: #e11d48;
+            --color-primary-dark: #be123c;
+            --color-secondary: #f97316;
+            --color-secondary-dark: #ea580c;
+            --color-background: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-light: #64748b;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-gray-100: #f1f5f9;
+            --color-gray-200: #e2e8f0;
+            --color-gray-300: #cbd5e1;
+            --color-gray-400: #94a3b8;
+            --color-gray-500: #64748b;
+            --color-gray-600: #475569;
+            --color-gray-700: #334155;
+            --color-gray-800: #1e293b;
+            --color-gray-900: #0f172a;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s ease;
+        }
+
+        .dark {
+            --color-primary: #f43f5e;
+            --color-primary-dark: #e11d48;
+            --color-secondary: #fb923c;
+            --color-secondary-dark: #f97316;
+            --color-background: #0f172a;
+            --color-text: #f1f5f9;
+            --color-text-light: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .dark .card {
+            background-color: var(--color-gray-800);
+        }
+
+        .card-header {
+            background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            color: var(--color-white);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--color-white);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .button-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .button-primary:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        .button-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+        }
+
+        .button-secondary:hover {
+            background-color: var(--color-secondary-dark);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background-color: var(--color-gray-100);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark .info-card {
+            background-color: var(--color-gray-700);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .info-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            background-color: var(--color-gray-200);
+            color: var(--color-gray-800);
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .dark .badge {
+            background-color: var(--color-gray-600);
+            color: var(--color-gray-200);
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--color-white);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .dark .contact-item {
+            background-color: var(--color-gray-700);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-name {
+            font-weight: 600;
+        }
+
+        .contact-number {
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+        }
+
+        .remove-contact {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-contact:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .input {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.5rem;
+            border: 1px solid var(--color-gray-300);
+            border-radius: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .dark .input {
+            background-color: var(--color-gray-700);
+            border-color: var(--color-gray-600);
+            color: var(--color-text);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .dark .modal-content {
+            background-color: var(--color-gray-800);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .card-title {
+                font-size: 2rem;
+            }
+
+            .card-subtitle {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input {
+                width: 100%;
+            }
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Women's Safety Hub</h1>
+                <p class="card-subtitle">Your personal guardian, always by your side</p>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+            <div class="card-content">
+                <div class="button-group">
+                    <button id="sosButton" class="button button-primary">
+                        <i data-lucide="alert-triangle"></i>
+                        <span>SOS</span>
+                    </button>
+                    <button id="fakeCallButton" class="button button-secondary">
+                        <i data-lucide="phone"></i>
+                        <span>Fake Call</span>
+                    </button>
+                    <button id="voiceRecognitionButton" class="button button-secondary">
+                        <i data-lucide="mic"></i>
+                        <span>Start Listening</span>
+                    </button>
+                </div>
+
+                <div id="smsConfirmation" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <i data-lucide="bell" style="width: 48px; height: 48px; margin: 0 auto 1rem; color: var(--color-primary);"></i>
+                        <p class="modal-title">SMS Sent Successfully</p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <i data-lucide="map-pin"></i>
+                            <span>Live Location</span>
+                        </div>
+                        <div id="locationContent" class="info-card-content">
+                            <p>Acquiring location...</p>
+                            <button id="refreshLocationButton" class="button button-secondary" style="margin-top: 1rem;">
+                                <i data-lucide="refresh-ccw"></i>
+                                <span>Refresh Location</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <i data-lucide="shield"></i>
+                            <span>Safety Status</span>
+                        </div>
+                        <div class="info-card-content">
+                            <div class="status-list">
+                                <div class="status-item">
+                                    <span>Recording:</span>
+                                    <span id="recordingStatus" class="badge">Inactive</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>Location Sharing:</span>
+                                    <span id="locationSharingStatus" class="badge">Active</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>Emergency Contacts:</span>
+                                    <span id="contactsCount" class="badge">2 Set</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>Unsafe Zone Alert:</span>
+                                    <span id="unsafeZoneStatus" class="badge">Inactive</span>
+                                </div>
+                                <div class="status-item">
+                                    <span>Voice Recognition:</span>
+                                    <span id="voiceRecognitionStatus" class="badge">Inactive</span>
+                                </div>
+                            </div>
+                            <button id="stopRecordingButton" class="button button-primary" style="display: none; width: 100%; margin-top: 1rem;">
+                                Stop Recording
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <i data-lucide="user-plus"></i>
+                            <span>Emergency Contacts</span>
+                        </div>
+                        <div class="info-card-content">
+                            <div id="contactsList" class="contact-list">
+                                <!-- Contacts will be dynamically added here -->
+                            </div>
+                            <div class="input-group">
+                                <input id="newContactName" type="text" placeholder="Name" class="input">
+                                <input id="newContactNumber" type="text" placeholder="Number" class="input">
+                                <button id="addContactButton" class="button button-primary">
+                                    <i data-lucide="user-plus"></i>
+                                    <span>Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <i data-lucide="alert-triangle"></i>
+                            <span>Nearby Unsafe Zones</span>
+                        </div>
+                        <div id="unsafeZonesContent" class="info-card-content">
+                            <p>No unsafe zones detected nearby. Stay vigilant!</p>
+                            <button id="checkUnsafeZonesButton" class="button button-secondary" style="margin-top: 1rem;">
+                                <i data-lucide="search"></i>
+                                <span>Check Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="incomingCallModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 class="modal-title">Incoming Call</h2>
+            <p>Mom</p>
+            <div class="modal-buttons">
+                <button id="answerCallButton" class="button button-primary">Answer</button>
+                <button id="rejectCallButton" class="button button-secondary">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            updateThemeIcon();
+        });
+
+        function updateThemeIcon() {
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark')) {
+                icon.setAttribute('data-lucide', 'moon');
+            } else {
+                icon.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+        }
+
+        // SOS button functionality
+        const sosButton = document.getElementById('sosButton');
+        const smsConfirmation = document.getElementById('smsConfirmation');
+        const locationSharingStatus = document.getElementById('locationSharingStatus');
+
+        sosButton.addEventListener('click', () => {
+            triggerSOS();
+        });
+
+        // Fake call functionality
+        const fakeCallButton = document.getElementById('fakeCallButton');
+        const incomingCallModal = document.getElementById('incomingCallModal');
+        const answerCallButton = document.getElementById('answerCallButton');
+        const rejectCallButton = document.getElementById('rejectCallButton');
+
+        fakeCallButton.addEventListener('click', () => {
+            incomingCallModal.style.display = 'flex';
+        });
+
+        answerCallButton.addEventListener('click', () => {
+            incomingCallModal.style.display = 'none';
+            // Implement fake call answer logic here
+            alert('Call answered (simulated).');
+        });
+
+        rejectCallButton.addEventListener('click', () => {
+            incomingCallModal.style.display = 'none';
+            // Implement fake call reject logic here
+            alert('Call rejected (simulated).');
+        });
+
+        // Voice recognition functionality
+        const voiceRecognitionButton = document.getElementById('voiceRecognitionButton');
+        const voiceRecognitionStatus = document.getElementById('voiceRecognitionStatus');
+        const stopRecordingButton = document.getElementById('stopRecordingButton');
+
+        let recognition; // To hold the SpeechRecognition instance
+
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            alert('Your browser does not support Speech Recognition. Please use Google Chrome.');
+        } else {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                console.log('Transcript:', transcript);
+                if (transcript.includes('help') || transcript.includes('sos')) {
+                    triggerSOS();
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech Recognition Error:', event.error);
+            };
+        }
+
+        voiceRecognitionButton.addEventListener('click', () => {
+            if (recognition) {
+                recognition.start();
+                voiceRecognitionStatus.textContent = 'Active';
+                voiceRecognitionButton.style.display = 'none';
+                stopRecordingButton.style.display = 'block';
+            }
+        });
+
+        stopRecordingButton.addEventListener('click', () => {
+            if (recognition) {
+                recognition.stop();
+                voiceRecognitionStatus.textContent = 'Inactive';
+                voiceRecognitionButton.style.display = 'block';
+                stopRecordingButton.style.display = 'none';
+            }
+        });
+
+        // Emergency contacts functionality
+        const contactsList = document.getElementById('contactsList');
+        const newContactName = document.getElementById('newContactName');
+        const newContactNumber = document.getElementById('newContactNumber');
+        const addContactButton = document.getElementById('addContactButton');
+        const contactsCount = document.getElementById('contactsCount');
+
+        let contacts = [
+            { name: 'Mom', number: '+12345678901' },
+            { name: 'Dad', number: '+12345678902' }
+        ];
+
+        function updateContactsList() {
+            contactsList.innerHTML = '';
+            contacts.forEach((contact, index) => {
+                const contactItem = document.createElement('div');
+                contactItem.className = 'contact-item';
+                contactItem.innerHTML = `
+                    <div class="contact-info">
+                        <span class="contact-name">${contact.name}</span>
+                        <span class="contact-number">${contact.number}</span>
+                    </div>
+                    <button class="remove-contact" data-index="${index}">
+                        <i data-lucide="x"></i>
+                    </button>
+                `;
+                contactsList.appendChild(contactItem);
+            });
+            lucide.createIcons();
+            contactsCount.textContent = `${contacts.length} Set`;
+        }
+
+        addContactButton.addEventListener('click', () => {
+            const name = newContactName.value.trim();
+            const number = newContactNumber.value.trim();
+            if (name && number && validatePhoneNumber(number)) {
+                contacts.push({ name, number });
+                updateContactsList();
+                newContactName.value = '';
+                newContactNumber.value = '';
+            } else {
+                alert('Please enter a valid name and phone number.');
+            }
+        });
+
+        contactsList.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-contact')) {
+                const index = e.target.closest('.remove-contact').dataset.index;
+                contacts.splice(index, 1);
+                updateContactsList();
+            }
+        });
+
+        function validatePhoneNumber(number) {
+            const phoneRegex = /^\+?[1-9]\d{1,14}$/; // Simple E.164 format
+            return phoneRegex.test(number);
+        }
+
+        updateContactsList();
+
+        // Live location functionality
+        const locationContent = document.getElementById('locationContent');
+        const refreshLocationButton = document.getElementById('refreshLocationButton');
+
+        let currentLatitude = null;
+        let currentLongitude = null;
+
+        function updateLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    currentLatitude = position.coords.latitude;
+                    currentLongitude = position.coords.longitude;
+                    locationContent.innerHTML = `
+                        <p>Latitude: ${currentLatitude.toFixed(4)}° N</p>
+                        <p>Longitude: ${currentLongitude.toFixed(4)}° W</p>
+                        <p>Last updated: ${new Date().toLocaleTimeString()}</p>
+                        <button id="refreshLocationButton" class="button button-secondary" style="margin-top: 1rem;">
+                            <i data-lucide="refresh-ccw"></i>
+                            <span>Refresh Location</span>
+                        </button>
+                    `;
+                    lucide.createIcons();
+                }, error => {
+                    locationContent.innerHTML = `<p>Error acquiring location: ${error.message}</p>`;
+                });
+            } else {
+                locationContent.innerHTML = '<p>Geolocation is not supported by this browser.</p>';
+            }
+        }
+
+        refreshLocationButton && refreshLocationButton.addEventListener('click', updateLocation);
+
+        updateLocation();
+
+        // Unsafe zone detection functionality
+        const unsafeZonesContent = document.getElementById('unsafeZonesContent');
+        const unsafeZoneStatus = document.getElementById('unsafeZoneStatus');
+        const checkUnsafeZonesButton = document.getElementById('checkUnsafeZonesButton');
+
+        function checkUnsafeZones() {
+            if (currentLatitude && currentLongitude) {
+                // Example: Fetch unsafe zones from your backend or a third-party service
+                // Here, we'll simulate unsafe zones based on random chance
+
+                const isUnsafe = Math.random() < 0.3; // 30% chance
+                if (isUnsafe) {
+                    unsafeZonesContent.innerHTML = `
+                        <p style="color: var(--color-primary);">Warning: You are near an unsafe zone!</p>
+                        <p>Location: Downtown Area</p>
+                        <p>Stay alert and consider leaving the area.</p>
+                        <button id="checkUnsafeZonesButton" class="button button-secondary" style="margin-top: 1rem;">
+                            <i data-lucide="search"></i>
+                            <span>Recheck</span>
+                        </button>
+                    `;
+                    unsafeZoneStatus.textContent = 'Active';
+                    lucide.createIcons();
+                } else {
+                    unsafeZonesContent.innerHTML = `
+                        <p>No unsafe zones detected nearby. Stay vigilant!</p>
+                        <button id="checkUnsafeZonesButton" class="button button-secondary" style="margin-top: 1rem;">
+                            <i data-lucide="search"></i>
+                            <span>Recheck</span>
+                        </button>
+                    `;
+                    unsafeZoneStatus.textContent = 'Inactive';
+                    lucide.createIcons();
+                }
+            } else {
+                alert('Current location is unavailable. Please refresh your location.');
+            }
+        }
+
+        checkUnsafeZonesButton && checkUnsafeZonesButton.addEventListener('click', checkUnsafeZones);
+
+        // Function to trigger SOS actions
+        function triggerSOS() {
+            if (contacts.length === 0) {
+                alert('No emergency contacts available.');
+                return;
+            }
+
+            // Send SMS to all emergency contacts via backend
+            const payload = {
+                contacts: contacts.map(contact => contact.number),
+                message: 'SOS! I need help. My current location is Latitude: ' + currentLatitude + ', Longitude: ' + currentLongitude
+            };
+
+            fetch('https://your-backend-domain.com/api/send-sms', { // Replace with your backend endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('SMS sent:', data);
+                // Show SMS confirmation modal
+                smsConfirmation.style.display = 'flex';
+                setTimeout(() => {
+                    smsConfirmation.style.display = 'none';
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Error sending SMS:', error);
+                alert('Failed to send SOS messages. Please try again.');
+            });
+
+            // Make calls to all emergency contacts via backend
+            fetch('https://your-backend-domain.com/api/make-calls', { // Replace with your backend endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ contacts: contacts.map(contact => contact.number) })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Calls initiated:', data);
+            })
+            .catch(error => {
+                console.error('Error making calls:', error);
+            });
+
+            // Start audio recording (requires HTTPS)
+            startAudioRecording();
+        }
+
+        // Function to start audio recording
+        function startAudioRecording() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert('Audio recording is not supported by your browser.');
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    const mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+                    console.log('Recording started');
+
+                    mediaRecorder.ondataavailable = (e) => {
+                        const audioData = e.data;
+                        // Send audio data to backend or save it as needed
+                        console.log('Audio data available:', audioData);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        console.log('Recording stopped');
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+
+                    // Store mediaRecorder for later use
+                    window.mediaRecorder = mediaRecorder;
+                })
+                .catch(err => {
+                    console.error('Error accessing microphone:', err);
+                    alert('Unable to access microphone.');
+                });
+        }
+
+        // Function to stop audio recording
+        function stopAudioRecording() {
+            if (window.mediaRecorder && window.mediaRecorder.state !== 'inactive') {
+                window.mediaRecorder.stop();
+            }
+        }
+
+        // Stop Recording Button Functionality
+        stopRecordingButton.addEventListener('click', () => {
+            stopAudioRecording();
+            voiceRecognitionStatus.textContent = 'Inactive';
+            voiceRecognitionButton.style.display = 'block';
+            stopRecordingButton.style.display = 'none';
+        });
+
+        // Unsafe Zones Check on Load
+        checkUnsafeZones();
+
+    </script>
+</body>
+</html>
